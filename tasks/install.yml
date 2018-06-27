@@ -1,0 +1,24 @@
+---
+- name: install | Ensure {{ letsencrypt_directory }} Exists
+  file:
+    path: "{{ letsencrypt_directory }}"
+    state: "directory"
+  become: true
+
+- name: install | Disabling Default Web Site
+  file:
+    path: "{{ letsencrypt_webserver_default_web }}"
+    state: "absent"
+  become: true
+  notify:
+    - "restart {{ letsencrypt_webserver_type }}"
+  when: >
+        letsencrypt_webserver and
+        letsencrypt_disable_default_website
+
+# https://wiki.openssl.org/index.php/Manual:Dhparam(1)
+- name: install | Generating  DHParams
+  command: "openssl dhparam -out {{ letsencrypt_dhparam_file }} {{ letsencrypt_dhparam_numbits }}"
+  args:
+    creates: "{{ letsencrypt_dhparam_file }}"
+  become: true

@@ -1,0 +1,16 @@
+---
+# defaults file for ansible-letsencrypt
+letsencrypt_directory: /var/www/letsencrypt
+
+letsencrypt_disable_default_website: true
+
+letsencrypt_modules:
+  - 'certbot'
+  # - 'certbot-apache'
+
+letsencrypt_dhparam_file: '/etc/{{ letsencrypt_webserver_type }}/dhparams.pem'
+
+letsencrypt_dhparam_numbits: 2048
+
+letsencrypt_webserver: true
+letsencrypt_webserver_type: 'apache2'

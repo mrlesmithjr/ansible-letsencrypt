@@ -1,0 +1,22 @@
+---
+- name: debian | Installing Pre-Reqs
+  apt:
+    name: "{{ item }}"
+    state: "present"
+  become: true
+  with_items:
+    - 'openssl'
+    - 'software-properties-common'
+
+- name: debian | Adding Certbot Repo
+  apt_repository:
+    repo: "ppa:certbot/certbot"
+    state: "present"
+  become: true
+
+- name: debian | Installing Certbot Modules
+  apt:
+    name: "{{ item }}"
+    state: "present"
+  become: true
+  with_items: '{{ letsencrypt_modules }}'

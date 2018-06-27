@@ -1,0 +1,14 @@
+---
+- name: set_facts | Setting Facts For Apache2
+  set_fact:
+    letsencrypt_webserver_default_web: '/etc/apache2/sites-enabled/000-default.conf'
+  when: >
+        letsencrypt_webserver and
+        letsencrypt_webserver_type|lower == 'apache2'
+
+- name: set_facts | Setting Facts For Nginx
+  set_fact:
+    letsencrypt_webserver_default_web: '/etc/nginx/sites-enabled/default'
+  when: >
+        letsencrypt_webserver and
+        letsencrypt_webserver_type|lower == 'nginx'
