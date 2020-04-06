@@ -1,22 +1,25 @@
 ---
 - name: debian | Installing Pre-Reqs
   apt:
-    name: "{{ item }}"
-    state: "present"
+    name:
+      - openssl
+      - software-properties-common
+    state: present
   become: true
-  with_items:
-    - 'openssl'
-    - 'software-properties-common'
+  register: result
+  until: result is successful
 
 - name: debian | Adding Certbot Repo
   apt_repository:
-    repo: "ppa:certbot/certbot"
-    state: "present"
+    repo: ppa:certbot/certbot
+    state: present
   become: true
+  when: ansible_distribution == "Ubuntu"
 
-- name: debian | Installing Certbot Modules
+- name: debian | Installing Certbot
   apt:
-    name: "{{ item }}"
-    state: "present"
+    name: certbot
+    state: present
   become: true
-  with_items: '{{ letsencrypt_modules }}'
+  register: result
+  until: result is successful

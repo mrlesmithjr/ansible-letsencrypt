@@ -1,20 +1,16 @@
 ---
-- name: install | Ensure {{ letsencrypt_directory }} Exists
+- name: install | Ensuring {{ letsencrypt_directory }} Exists
   file:
     path: "{{ letsencrypt_directory }}"
-    state: "directory"
+    state: directory
   become: true
 
-- name: install | Disabling Default Web Site
-  file:
-    path: "{{ letsencrypt_webserver_default_web }}"
-    state: "absent"
+- name: install | Certbot Dry-Run
+  command: certbot certonly --standalone --noninteractive --dry-run --agree-tos --email {{ letsencrypt_admin_email }} -d {{ item }}
   become: true
-  notify:
-    - "restart {{ letsencrypt_webserver_type }}"
-  when: >
-        letsencrypt_webserver and
-        letsencrypt_disable_default_website
+  args:
+    creates: /etc/letsencrypt/live/{{ item }}
+  loop: "{{ letsencrypt_domains }}"
 
 # https://wiki.openssl.org/index.php/Manual:Dhparam(1)
 - name: install | Generating  DHParams
