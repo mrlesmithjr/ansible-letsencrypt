@@ -1,7 +1,4 @@
 ---
-# tasks file for ansible-letsencrypt
-# - include_tasks: set_facts.yml
-
 - include_tasks: debian.yml
   when: ansible_os_family == "Debian"
 
