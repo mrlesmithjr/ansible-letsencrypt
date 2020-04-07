@@ -1,3 +1,9 @@
+commit 8ed6b4fe95b0e1275383a703398def73d9cb01fa
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Mon Apr 6 20:38:07 2020 -0400
+
+    Fixing missing vars and RedHat install
+
 commit cc78628054c8b37d91110e44a154d863f9f8d454
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Mon Apr 6 19:00:08 2020 -0400
