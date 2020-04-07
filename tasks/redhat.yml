@@ -14,3 +14,22 @@
   become: true
   register: result
   until: result is successful
+  when: ansible_distribution != "Fedora"
+
+- name: redhat | Installing Certbot
+  yum:
+    name: certbot
+    state: present
+  become: true
+  register: result
+  until: result is successful
+  when: ansible_distribution != "Fedora"
+
+- name: redhat | Installing Certbot
+  dnf:
+    name: certbot
+    state: present
+  become: true
+  register: result
+  until: result is successful
+  when: ansible_distribution == "Fedora"

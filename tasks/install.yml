@@ -1,15 +1,18 @@
 ---
-- name: install | Ensuring {{ letsencrypt_directory }} Exists
+- name: install | Ensuring Letsencrypt Directories Exist
   file:
-    path: "{{ letsencrypt_directory }}"
+    path: "{{ letsencrypt_directory+'/'+item }}"
     state: directory
   become: true
+  loop:
+    - certs
+    - private
 
 - name: install | Certbot Dry-Run
   command: certbot certonly --standalone --noninteractive --dry-run --agree-tos --email {{ letsencrypt_admin_email }} -d {{ item }}
   become: true
   args:
-    creates: /etc/letsencrypt/live/{{ item }}
+    creates: "/etc/letsencrypt/live/{{ item }}"
   loop: "{{ letsencrypt_domains }}"
 
 # https://wiki.openssl.org/index.php/Manual:Dhparam(1)
