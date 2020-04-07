@@ -11,3 +11,6 @@ letsencrypt_dhparam_numbits: 2048
 letsencrypt_domains:
   []
   # - example.org
+
+# Defines whether to just test SSL cert request or make permanent
+letsencrypt_dry_run: true

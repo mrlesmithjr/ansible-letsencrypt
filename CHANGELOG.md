@@ -1,3 +1,9 @@
+commit a432fc0a56262035db1d49cb117b62ae7dda6d7d
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Mon Apr 6 22:28:20 2020 -0400
+
+    Removed set_facts for now
+
 commit 5fa31e5ee63dd1c2e68c87829d49a4e9862205ca
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Mon Apr 6 20:46:38 2020 -0400
